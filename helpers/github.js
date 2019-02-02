@@ -1,5 +1,5 @@
 const request = require('request');
-const config = require('../config.js');
+// const config = require('../config.js');
 
 // GET /users/:username/repos - lists all repos for user
 // URL should be base URL plus /users/{username}/repos
