@@ -13,7 +13,11 @@ class App extends React.Component {
 
   }
 
-  search (term) {
+  componentDidMount() {
+    this.getRepos();
+  }
+
+  search(term) {
     console.log(`${term} was searched`);
     // this should send post request to server
     $.ajax({
@@ -23,6 +27,12 @@ class App extends React.Component {
       data: term,
       success: ((data) => {console.log(data)}),
       error: ((err) => {console.log(err)})
+    });
+  }
+
+  getRepos() {
+    $.get("http://localhost:1128/repos", (data) => {
+      alert( "Data Loaded: " + JSON.stringify(data));
     });
   }
 
