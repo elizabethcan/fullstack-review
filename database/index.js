@@ -31,7 +31,11 @@ let save = (repoArr) => {
 }
 
 var runQuery = (callback) => {
-  Repo.find().exec(callback);
+  Repo.find()
+  .select("name hmtl_url stargazers_count")
+  .limit(25)
+  .sort({stargazers_count: -1})
+  .exec(callback);
 }
 
 module.exports.save = save;

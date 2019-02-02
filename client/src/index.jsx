@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+import RepoDisplay from './components/RepoDisplay.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +15,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getRepos();
+    $.get("http://localhost:1128/repos", (data) => {
+      console.log(data);
+      this.setState({
+        repos: data
+      });
+    });
   }
 
   search(term) {
@@ -30,17 +36,12 @@ class App extends React.Component {
     });
   }
 
-  getRepos() {
-    $.get("http://localhost:1128/repos", (data) => {
-      alert( "Data Loaded: " + JSON.stringify(data));
-    });
-  }
-
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
       <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
+      <RepoDisplay repos={this.state.repos}/>
     </div>)
   }
 }
