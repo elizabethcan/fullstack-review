@@ -17,24 +17,11 @@ let getReposByUsername = (username, callback) => {
       'Authorization': `token ${config.TOKEN}`
     }
   }
-  console.log(options);
-  // request.get(options).on('response', (err, res, body) => {
-  //   if (err) {
-  //     console.log('error occurred')
-  //   } else {
-  //     console.log(`res: ${res}`);
-  //     console.log(`body: `, body);
-  //   }
-  // });
   request(options, (err, res, body) => {
     var parsedBody = JSON.parse(body);
     if (err) {
       callback(err);
     } else {
-      // console.log(res.statusCode);
-      // console.log(parsedBody.)
-      // console.log(`body: `, parsedBody);
-      // return parsedBody;
       callback(null, parsedBody);
     }
   });
