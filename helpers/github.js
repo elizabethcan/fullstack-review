@@ -4,7 +4,7 @@ const config = require('../config.js');
 // GET /users/:username/repos - lists all repos for user
 // URL should be base URL plus /users/{username}/repos
 
-let getReposByUsername = (username) => {
+let getReposByUsername = (username, callback) => {
   // TODO - Use the request module to request repos for a specific
   // user from the github API
 
@@ -16,8 +16,28 @@ let getReposByUsername = (username) => {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`
     }
-  };
-  
+  }
+  console.log(options);
+  // request.get(options).on('response', (err, res, body) => {
+  //   if (err) {
+  //     console.log('error occurred')
+  //   } else {
+  //     console.log(`res: ${res}`);
+  //     console.log(`body: `, body);
+  //   }
+  // });
+  request(options, (err, res, body) => {
+    var parsedBody = JSON.parse(body);
+    if (err) {
+      callback(err);
+    } else {
+      // console.log(res.statusCode);
+      // console.log(parsedBody.)
+      // console.log(`body: `, parsedBody);
+      // return parsedBody;
+      callback(null, parsedBody);
+    }
+  });
 }
 
 module.exports.getReposByUsername = getReposByUsername;
